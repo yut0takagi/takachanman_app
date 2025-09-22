@@ -9,8 +9,27 @@ services:
     environment:
       - APP_ENV=container
       - APP_DEBUG=false
+      - APP_SECRET_KEY=changeme-in-docker
+      - APP_DATABASE_URL=postgresql+psycopg2://takachan:takachan@db:5432/takachan_db
       # - APP_ROOT_PATH=/api  # uncomment if served behind reverse proxy
     # For local development with live code (no reload inside container by default)
     # volumes:
     #   - ./server:/app/server:ro
+    depends_on:
+      - db
 
+  db:
+    image: postgres:15-alpine
+    container_name: takachanman_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=takachan_db
+      - POSTGRES_USER=takachan
+      - POSTGRES_PASSWORD=takachan
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:

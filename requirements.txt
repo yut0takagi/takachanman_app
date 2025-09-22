@@ -1,2 +1,11 @@
 fastapi>=0.110
 uvicorn[standard]>=0.23
+SQLAlchemy>=2.0
+python-jose[cryptography]>=3.3
+passlib[bcrypt]>=1.7
+pydantic-settings>=2.4
+httpx>=0.24
+pytest>=7.0
+email-validator>=2.0
+python-multipart>=0.0.7
+psycopg2-binary>=2.9

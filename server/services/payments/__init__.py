@@ -1,2 +1,0 @@
-"""Payments service package."""
-
