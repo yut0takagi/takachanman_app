@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-wheel-metadata/
+
+# VCS
+.git/
+.gitignore
+
+# OS/IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Caches
+.mypy_cache/
+.pytest_cache/
+dist/
+build/
+
+# Misc
+*.log
+

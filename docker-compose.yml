@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: takachanman_api
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_ENV=container
+      - APP_DEBUG=false
+      # - APP_ROOT_PATH=/api  # uncomment if served behind reverse proxy
+    # For local development with live code (no reload inside container by default)
+    # volumes:
+    #   - ./server:/app/server:ro
+
