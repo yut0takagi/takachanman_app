@@ -11,7 +11,7 @@
   padding: 12px;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(255, 247, 0, 0.89);
   ">
   <strong>結局 Git のブランチ戦略ってどうすればいいの？</strong><br>
   Qiita<br>
