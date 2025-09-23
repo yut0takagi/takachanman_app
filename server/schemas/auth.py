@@ -24,4 +24,5 @@ class TokenPair(BaseModel):
 
 class TokenRefresh(BaseModel):
     refresh_token: str
-
+"""認証関連のPydanticスキーマ。
+ユーザ登録/出力、トークンペイロード等を定義する。"""

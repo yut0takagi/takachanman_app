@@ -24,4 +24,4 @@ def record_event(action: str, actor: str | None = None, target: str | None = Non
 def recent_events(limit: int = 100) -> List[Dict[str, object]]:
     items = list(_events)
     return [asdict(e) for e in items[-limit:]]
-
+"""共通監査ログ（簡易インメモリ）。\nイベント記録と直近取得のヘルパーを提供する。"""

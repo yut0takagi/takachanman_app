@@ -29,4 +29,5 @@ class Role(Base):
     users = relationship("User", secondary=UserRole, back_populates="roles")
 
     __table_args__ = (UniqueConstraint("name", name="uq_roles_name"),)
-
+"""ユーザ/ロールのデータモデル定義（SQLAlchemy）。
+ユーザとロールの多対多関連を含む。"""

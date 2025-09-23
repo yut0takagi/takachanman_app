@@ -22,4 +22,5 @@ def create_all() -> None:
     from server.models.user import User, Role, UserRole  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
-
+"""データベース接続管理（SQLAlchemy）。
+Engine/Session/Base の生成とテーブル作成ヘルパーを提供する。"""

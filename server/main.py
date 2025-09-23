@@ -1,3 +1,6 @@
+"""FastAPIアプリのエントリーポイント。
+共通（/common/*）とサービス固有ルータの組み立て、
+CORS/レート制限/メトリクス/ログなどのミドルウェア設定を行う。"""
 from fastapi import FastAPI
 
 from server.core.config import settings
@@ -5,11 +8,12 @@ from server.core.database import create_all
 from server.core.rate_limit import add_rate_limit_middleware
 from server.common.metrics import add_metrics_middleware
 from server.common.auth import router as auth_router
-from server.api.routers.analytics import router as analytics_router
+from server.common.payments import router as payments_router
+from server.common.analytics import router as analytics_router
 from server.common.router import router as common_router
-from server.api.routers.billing import router as billing_router
 from fastapi.middleware.cors import CORSMiddleware
 from server.common.utils.logging_utils import register_handler as register_logging_handler
+from server.service1.router import router as service1_router
 
 
 def create_app() -> FastAPI:
@@ -35,15 +39,12 @@ def create_app() -> FastAPI:
     # Centralized common features
     app.include_router(common_router, prefix="/common", tags=["common"])
     app.include_router(auth_router, prefix="/common/auth", tags=["auth"])
-    try:
-        from server.api.routers.payments import router as payments_router  # type: ignore
+    app.include_router(payments_router, prefix="/common/payments", tags=["payments"])
 
-        app.include_router(payments_router, prefix="/common/payments", tags=["payments"])
-    except Exception:
-        app.include_router(billing_router, prefix="/common/billing", tags=["billing"])
-
-    # Service specific namespaces
-    app.include_router(analytics_router, prefix="/yutotkg/analytics", tags=["analytics"])
+    # Service-like common namespaces
+    app.include_router(analytics_router, prefix="/common/analytics", tags=["analytics"])
+    # Example service under /service1/*
+    app.include_router(service1_router, prefix="/service1", tags=["service1"])
 
     @app.get("/health")
     def health() -> dict:

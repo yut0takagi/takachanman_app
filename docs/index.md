@@ -14,3 +14,4 @@
   gh-pages<br>
   <small>https://yut0takagi.github.io/takachanman_app/</small>
 </a>
+<!-- このファイルはプロジェクトドキュメントのインデックスです。 -->

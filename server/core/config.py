@@ -33,3 +33,5 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
+"""アプリ全体の設定（Pydantic Settings）。
+環境変数/.env から読み込み、DB・CORS・トークン期限・ロール設定を提供する。"""
