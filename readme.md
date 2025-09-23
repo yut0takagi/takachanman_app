@@ -20,18 +20,19 @@
   │   │   ├── database.py            # SQLAlchemy (SQLite)
   │   │   ├── security.py            # bcrypt + JWT
   │   │   └── rate_limit.py          # 簡易RateLimitミドルウェア
-  │   ├── api/
-  │   │   ├── __init__.py
-  │   │   └── routers/
-  │   │       ├── analytics.py       # /yutotkg/analytics/*
-  │   │       └── payments.py        # /common/payments/*
+  │   ├── api/                        # （削除済み）すべて common/ に統合
   │   ├── common/
   │   │   ├── __init__.py
   │   │   ├── auth.py                # /common/auth/*
   │   │   ├── deps.py                # 認証・RBAC依存
   │   │   ├── router.py              # /common/* 共通多数: health, metrics, audit, version, config, ping, time, uuid, ip, headers, echo, uptime, crypto(hash/verify), base64(encode/decode), env, readiness, liveness, whoami
   │   │   ├── metrics.py             # メトリクスミドルウェア/取得
-  │   │   └── audit.py               # 監査ログ（簡易インメモリ）
+  │   │   ├── audit.py               # 監査ログ（簡易インメモリ）
+  │   │   ├── payments.py            # /common/payments/*（共通化）
+  │   │   └── analytics.py           # /common/analytics/*（共通化）
+  │   ├── service1/
+  │   │   ├── __init__.py
+  │   │   └── router.py              # /service1/* サンプルサービス
   │   ├── models/
   │   │   ├── __init__.py
   │   │   └── user.py                # User, Role, UserRole
@@ -51,7 +52,8 @@
 
 - 認証: /common/auth/register, /common/auth/login, /common/auth/refresh, /common/auth/me
 - RBAC: `require_roles(["analyst", "billing", "admin"])` などで保護
-- サービス: `/yutotkg/analytics/events`
+- サービス（共通化）: `/common/analytics/events`
+- サンプルサービス: `/service1/hello`, `/service1/items` (GET/POST), `/service1/admin`
 - 共通例:
   - `/common/health`, `/common/health/deep`, `/common/readiness`, `/common/liveness`
   - `/common/metrics`, `/common/uptime`
@@ -71,7 +73,7 @@
 ## 設計ポリシー（今日の変更点）
 
 - 共通機能は server/common/ に統合（auth, deps, router, metrics, audit）。エンドポイントは `/common/*` 配下。
-- サービス固有の API は server/api/routers/ に配置し、パスはサービス名で切る（例: `/yutotkg/analytics/*`）。
+- API は server/common/ に統合し、`/common/<area>/*` で提供（auth, payments, analytics など）。
 - 認証は共通化（/common/auth/*）。アクセストークン/リフレッシュトークン、bcrypt、RBAC（ロール）対応。
 - 監視・運用向けの共通エンドポイントを多数追加（health/readiness/liveness、metrics、audit、version/config、whoami、base64 など）。
   - Prometheus 形式の `/common/metrics/prometheus` と、ログ閲覧 `/common/logs`・レベル変更 `/common/logs/level` を追加。
@@ -116,6 +118,15 @@ curl -sS http://localhost:8000/common/whoami -H "Authorization: Bearer $ACCESS"
 curl -sS http://localhost:8000/common/metrics
 curl -sS http://localhost:8000/common/metrics/prometheus
 curl -sS -X POST http://localhost:8000/common/base64/encode -H 'Content-Type: application/json' -d '{"text":"hello"}'
+
+6) サンプルサービス (/service1/*)
+
+```bash
+curl -sS http://localhost:8000/service1/hello
+curl -sS http://localhost:8000/service1/items
+curl -sS -X POST http://localhost:8000/service1/items -H "Authorization: Bearer $ACCESS"
+curl -sS http://localhost:8000/service1/admin -H "Authorization: Bearer $ACCESS"  # admin ロールが必要
+```
 ```
 
 5) RBAC 保護エンドポイント
