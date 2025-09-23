@@ -1,3 +1,4 @@
+<!-- このファイルはプロジェクトの概要・構成・使い方を説明するREADMEです。 -->
 # takachanman unified FastAPI server
 
 本プロジェクトは以下を単一サーバで提供します：

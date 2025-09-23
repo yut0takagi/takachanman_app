@@ -207,3 +207,4 @@ class LogLevelIn(BaseModel):
 def logs_level(payload: LogLevelIn, _: User = Depends(require_roles(["admin"]))):
     set_log_level(payload.name, payload.level)
     return {"ok": True}
+"""/common 配下の共通APIルータ集。\nヘルス・メトリクス・監査・ユーティリティ・ログ関連エンドポイントを提供する。"""

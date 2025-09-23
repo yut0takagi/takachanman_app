@@ -1,3 +1,4 @@
+# このファイルはDocker ComposeでAPIとDB(PostgreSQL)を起動/管理するための定義です。
 version: "3.9"
 
 services:

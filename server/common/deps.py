@@ -56,4 +56,4 @@ def get_optional_user(token: Optional[str] = Depends(oauth2_scheme_optional), db
         return user
     except Exception:
         return None
-
+"""共通依存関数。\n現在ユーザ取得・RBACチェック・任意認証ユーザ取得を提供する。"""

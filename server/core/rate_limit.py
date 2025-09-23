@@ -22,4 +22,5 @@ def add_rate_limit_middleware(app: FastAPI, max_requests: int = 60, window_secon
             return JSONResponse(status_code=429, content={"detail": "Rate limit exceeded"})
         dq.append(now)
         return await call_next(request)
-
+"""簡易レート制限ミドルウェア。
+メモリ上でパスごとのリクエスト数を制限し、429 を返す。"""

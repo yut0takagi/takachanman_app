@@ -1,2 +1,1 @@
-# Package marker for common utilities and routers
-
+"""共通機能（/common/*）のパッケージ。\n認証・依存・監査・メトリクス・ユーティリティ等を集約する。"""

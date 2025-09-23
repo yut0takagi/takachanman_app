@@ -71,4 +71,4 @@ def refresh_token(payload: TokenRefresh):
 @router.get("/me", response_model=UserOut)
 def me(user: User = Depends(get_current_user)):
     return UserOut(id=user.id, email=user.email, roles=[r.name for r in user.roles])
-
+"""/common/auth 配下の認証API。\nユーザ登録・ログイン・トークン更新・ユーザ情報取得を提供する。"""

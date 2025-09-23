@@ -1,2 +1,1 @@
-# Package marker
-
+"""サービス固有APIのパッケージ。"""

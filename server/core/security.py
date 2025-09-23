@@ -40,4 +40,5 @@ def decode_token(token: str) -> Dict[str, Any]:
         return payload
     except JWTError as e:
         raise ValueError("Invalid token") from e
-
+"""セキュリティ関連ユーティリティ。
+bcrypt によるパスワードハッシュ/検証と、JWT の発行/検証を提供する。"""

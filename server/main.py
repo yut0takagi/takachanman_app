@@ -1,3 +1,6 @@
+"""FastAPIアプリのエントリーポイント。
+共通（/common/*）とサービス固有ルータの組み立て、
+CORS/レート制限/メトリクス/ログなどのミドルウェア設定を行う。"""
 from fastapi import FastAPI
 
 from server.core.config import settings

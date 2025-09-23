@@ -1,3 +1,4 @@
+# このファイルはDockerビルド時に除外するファイル/ディレクトリを指定します。
 # Python
 __pycache__/
 *.py[cod]
@@ -27,4 +28,3 @@ build/
 
 # Misc
 *.log
-

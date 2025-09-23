@@ -61,3 +61,4 @@ def render_prometheus() -> str:
         )
 
     return "\n".join(lines) + "\n"
+"""共通メトリクス機能。\nミドルウェアでリクエスト統計を収集し、JSON/Prometheus形式で提供する。"""

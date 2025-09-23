@@ -1,3 +1,4 @@
+# このファイルはアプリで使用するPython依存パッケージの一覧です。
 fastapi>=0.110
 uvicorn[standard]>=0.23
 SQLAlchemy>=2.0

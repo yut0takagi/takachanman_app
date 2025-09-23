@@ -55,4 +55,4 @@ def get_logs(limit: int = 200, level: Optional[str] = None) -> List[Dict[str, ob
 
 def set_log_level(name: str, level: str) -> None:
     logging.getLogger(name).setLevel(level.upper())
-
+"""ログユーティリティ。\nリングバッファハンドラによる最近ログの収集・取得と、ログレベル変更を提供する。"""

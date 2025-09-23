@@ -32,3 +32,4 @@ def test_register_login_me_and_protected_routes():
     # Billing protected requires billing/admin role
     r = client.get("/common/payments/invoices", headers=headers)
     assert r.status_code == 403
+"""最小の認証フローを検証するpytestテスト。\n登録→ログイン→/me→保護ルートの403 を確認する。"""
